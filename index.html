@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --blue: #2a35e8; }
+  html, body {
+    background: #f0f0f0;
+    font-family: 'Poppins', 'DejaVu Sans', sans-serif;
+    color: #1a1a1a;
+    min-height: 100vh;
+  }
+  .wrapper {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+  }
+
+  /* TOP STRIP */
+  .topstrip {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: clamp(16px, 3vw, 28px) clamp(24px, 5vw, 52px);
+    border-bottom: 1px solid #ccc;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .ts-label { font-size: clamp(10px, 1.3vw, 13px); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .ts-mid   { font-size: clamp(10px, 1.3vw, 13px); font-weight: 400; line-height: 1.8; text-align: center; }
+  .ts-right { font-size: clamp(10px, 1.3vw, 13px); font-weight: 400; line-height: 1.8; text-align: right; }
+
+  /* NAME */
+  .name-hero {
+    padding: clamp(8px, 1.5vw, 16px) 0 0 clamp(24px, 5vw, 52px);
+    line-height: .87;
+    overflow: hidden;
+  }
+  .name-hero span {
+    display: block;
+    font-size: clamp(56px, 13vw, 110px);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    text-transform: uppercase;
+    color: var(--blue);
+    white-space: nowrap;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 2px solid #1a1a1a;
+    margin: clamp(10px, 2vw, 18px) clamp(24px, 5vw, 52px) 0;
+  }
+
+  /* BODY */
+  .body { padding: 0 clamp(24px, 5vw, 52px) clamp(32px, 4vw, 52px); }
+
+  /* ── SECTION HEADER ROW: label left, rule right ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    padding-top: clamp(14px, 2vw, 20px);
+  }
+  .section-header .sec-left {
+    width: clamp(110px, 18vw, 175px);
+    flex-shrink: 0;
+    padding-right: clamp(12px, 2vw, 22px);
+  }
+  .section-header .sec-rule {
+    flex: 1;
+    border: none;
+    border-top: 2px solid #1a1a1a;
+  }
+
+  /* ── JOB ROW: company left, content right ── */
+  .job-row {
+    display: flex;
+    align-items: flex-start;
+    padding-top: clamp(10px, 1.5vw, 14px);
+  }
+  .job-row .sec-left {
+    width: clamp(110px, 18vw, 175px);
+    flex-shrink: 0;
+    padding-right: clamp(12px, 2vw, 22px);
+  }
+  .job-row .sec-right { flex: 1; min-width: 0; }
+
+  /* Shared left col styles */
+  .sec-label {
+    font-size: clamp(9px, 1.2vw, 12px);
+    font-weight: 800;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+  .company-name {
+    font-size: clamp(9px, 1.2vw, 12px);
+    font-weight: 400;
+    color: #555;
+    line-height: 1.4;
+  }
+
+  /* Job content */
+  .job-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: clamp(4px, 0.8vw, 8px);
+    gap: 12px;
+  }
+  .job-title { font-size: clamp(11px, 1.5vw, 14px); font-weight: 700; color: var(--blue); }
+  .job-dates {
+    font-size: clamp(9px, 1.1vw, 11px);
+    font-weight: 400; color: #555;
+    text-align: right; white-space: nowrap;
+    flex-shrink: 0; line-height: 1.55;
+  }
+
+  ul.jb { list-style: none; }
+  ul.jb li {
+    font-size: clamp(9.5px, 1.2vw, 11.5px);
+    font-weight: 400; color: #2a2a2a;
+    line-height: 1.65; padding-left: 14px;
+    position: relative; margin-bottom: 3px;
+  }
+  ul.jb li::before {
+    content: '\2022'; position: absolute; left: 1px;
+    color: var(--blue); font-size: clamp(10px, 1.3vw, 13px); top: -1px;
+  }
+  .kw {
+    display: inline-block; background: var(--blue); color: #fff;
+    font-size: clamp(6px, 0.9vw, 8px); font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    padding: 2px 6px; border-radius: 1px; margin-left: 6px; vertical-align: middle;
+  }
+
+  /* Other sections */
+  .sec-right-content {
+    flex: 1;
+    min-width: 0;
+  }
+  .edu-school { font-size: clamp(11px, 1.4vw, 13px); font-weight: 700; }
+  .edu-degree { font-size: clamp(11px, 1.4vw, 13px); font-weight: 400; margin-top: 1px; }
+  .edu-years  { font-size: clamp(10px, 1.2vw, 12px); font-weight: 400; color: #555; margin-top: 3px; }
+
+  .skills-line { font-size: clamp(10px, 1.3vw, 12.5px); font-weight: 400; line-height: 1.8; }
+  .skills-line span { color: var(--blue); font-weight: 700; margin: 0 4px; }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .wrapper { margin: 0; box-shadow: none; }
+    .topstrip { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .ts-mid, .ts-right { text-align: left; }
+    .name-hero span { font-size: clamp(44px, 16vw, 80px); white-space: normal; }
+    .section-header, .job-row { flex-direction: column; }
+    .section-header .sec-left,
+    .job-row .sec-left { width: 100%; padding-right: 0; padding-bottom: 4px; }
+    .section-header .sec-rule { width: 100%; margin-top: 6px; }
+    .job-title-row { flex-wrap: wrap; }
+    .job-dates { text-align: left; }
+  }
+
+  /* TABLET */
+  @media (min-width: 601px) and (max-width: 800px) {
+    .name-hero span { font-size: clamp(72px, 12vw, 100px); }
+    .section-header .sec-left,
+    .job-row .sec-left { width: 130px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="topstrip">
+    <div class="ts-label">Resume</div>
+    <div class="ts-mid">nicklak@mac.com<br>www.nicklak.com<br>718.288.8516</div>
+    <div class="ts-right">40 Fane Ct<br>Brooklyn, NY 11229</div>
+  </div>
+
+  <div class="name-hero">
+    <span>Nick</span>
+    <span>Lakiotes.</span>
+  </div>
+
+  <hr class="divider">
+
+  <div class="body">
+
+    <!-- EXPERIENCE header: label aligns with rule -->
+    <div class="section-header">
+      <div class="sec-left"><div class="sec-label">Experience</div></div>
+      <hr class="sec-rule">
+    </div>
+
+    <!-- Job rows: company name aligns with job title -->
+    <div class="job-row">
+      <div class="sec-left"><div class="company-name">TripleLift</div></div>
+      <div class="sec-right">
+        <div class="job-title-row">
+          <div class="job-title">Sr. Global Creative Director</div>
+          <div class="job-dates">Feb 2020<br>Present</div>
+        </div>
+        <ul class="jb">
+          <li>Defined &#8216;Creative SSP&#8217; positioning to differentiate TripleLift in the ad tech market</li>
+          <li>Orchestrated complete re-brand across all channels prior to <strong>$1.4B acquisition</strong><span class="kw">Key Win</span></li>
+          <li>Built &amp; led cross-functional creative team; scaled production for hundreds of campaigns annually</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job-row">
+      <div class="sec-left"><div class="company-name">Undertone</div></div>
+      <div class="sec-right">
+        <div class="job-title-row">
+          <div class="job-title">Sr. Art Director</div>
+          <div class="job-dates">Oct 2015<br>Jan 2020</div>
+        </div>
+        <ul class="jb">
+          <li>Leveraged strategic vision &amp; artistic talent to deliver high-impact marketing &amp; sales collateral</li>
+          <li>Initiated &amp; built customized presentation template system &#8212; cutting hours of work into minutes</li>
+          <li>Managed &amp; mentored creative teams; partnered with leadership on visual strategy</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job-row">
+      <div class="sec-left"><div class="company-name">iHeartMedia</div></div>
+      <div class="sec-right">
+        <div class="job-title-row">
+          <div class="job-title">Art Director / Visual Strategist</div>
+          <div class="job-dates">Jun 2011<br>Oct 2015</div>
+        </div>
+        <ul class="jb">
+          <li>Lead designer of Macy&#8217;s iHeartRadio Rising Star campaign &#8212; generated <strong>$24M in revenue</strong><span class="kw">Key Win</span></li>
+          <li>Spearheaded creative execution on multi-million dollar client campaigns &amp; activations</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job-row">
+      <div class="sec-left"><div class="company-name">Six Point<br>Harness</div></div>
+      <div class="sec-right">
+        <div class="job-title-row">
+          <div class="job-title">Co-Founder / Art Director</div>
+          <div class="job-dates">Dec 2003<br>Jun 2009</div>
+        </div>
+        <ul class="jb">
+          <li>Established animation studio from the ground up; built &amp; led a 40+ person production team</li>
+          <li>Directed creative for major brand campaigns; established scalable production workflows</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="section-header">
+      <div class="sec-left"><div class="sec-label">Education</div></div>
+      <hr class="sec-rule">
+    </div>
+    <div class="job-row">
+      <div class="sec-left"></div>
+      <div class="sec-right">
+        <div class="edu-school">SUNY Oneonta</div>
+        <div class="edu-degree">B.A. Fine Arts, Computer Art</div>
+        <div class="edu-years">1995 &#8212; 1999</div>
+      </div>
+    </div>
+
+    <!-- SKILLSET -->
+    <div class="section-header">
+      <div class="sec-left"><div class="sec-label">Skillset</div></div>
+      <hr class="sec-rule">
+    </div>
+    <div class="job-row">
+      <div class="sec-left"></div>
+      <div class="sec-right">
+        <div class="skills-line">
+          Team Leadership <span>-</span> Creative Direction <span>-</span> Brand Strategy <span>-</span> Adobe Suite <span>-</span> Typography <span>-</span> Package Design <span>-</span> Animation Direction <span>-</span> Experiential Marketing <span>-</span> Project Management
+        </div>
+      </div>
+    </div>
+
+    <!-- CONNECT -->
+    <div class="section-header">
+      <div class="sec-left"><div class="sec-label">Connect</div></div>
+      <hr class="sec-rule">
+    </div>
+    <div class="job-row">
+      <div class="sec-left"></div>
+      <div class="sec-right">
+        <div class="skills-line">
+          <a href="https://instagram.com/nicklakiotes" style="color:var(--blue);text-decoration:none;">instagram.com/nicklakiotes</a>
+          <span>-</span>
+          <a href="https://linkedin.com/in/nicklak" style="color:var(--blue);text-decoration:none;">linkedin.com/in/nicklak</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

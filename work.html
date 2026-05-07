@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nick Lakiotes — Selected Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root { --blue: #2a35e8; }
+
+  html, body {
+    background: #fff;
+    font-family: 'Poppins', 'DejaVu Sans', sans-serif;
+    color: #1a1a1a;
+    min-height: 100vh;
+  }
+
+  /* ── TOP STRIP ── */
+  .topstrip {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 22px 56px 18px 56px;
+    border-bottom: none;
+  }
+  .ts-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .ts-mid {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.8;
+    text-align: center;
+  }
+  .ts-right {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.8;
+    text-align: right;
+  }
+
+  /* ── NAME HERO ── */
+  .name-hero {
+    padding: 8px 0 0 56px;
+    line-height: .87;
+    overflow: hidden;
+  }
+  .name-hero span {
+    display: block;
+    font-size: clamp(72px, 13vw, 110px);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    text-transform: uppercase;
+    color: var(--blue);
+    white-space: nowrap;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .name-hero span:nth-child(1) { animation-delay: 0.05s; }
+  .name-hero span:nth-child(2) { animation-delay: 0.15s; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 2px solid #1a1a1a;
+    margin: 14px 56px 0 56px;
+  }
+
+  /* ── BODY ── */
+  .body { padding: 0 56px 80px; }
+
+  .section-row {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 20px;
+    opacity: 0;
+  }
+
+  .section-row:nth-child(1) { animation: fadeUp 0.5s 0.3s forwards; }
+  .section-row:nth-child(2) { animation: fadeUp 0.5s 0.45s forwards; }
+  .section-row:nth-child(3) { animation: fadeUp 0.5s 0.6s forwards; }
+
+  .sec-left {
+    width: 200px;
+    flex-shrink: 0;
+    padding-right: 24px;
+  }
+
+  .sec-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+
+  .sec-right {
+    flex: 1;
+    border-top: 2px solid #1a1a1a;
+    padding-top: 18px;
+  }
+
+  /* ── EVENT ENTRY ── */
+  .event-entry {
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .event-entry:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .event-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    gap: 16px;
+  }
+
+  .event-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: -.01em;
+    line-height: 1.2;
+  }
+
+  .event-location {
+    font-size: 10.5px;
+    font-weight: 400;
+    color: #555;
+    text-align: right;
+    white-space: nowrap;
+    flex-shrink: 0;
+    line-height: 1.55;
+  }
+
+  .event-subtitle {
+    font-size: 11px;
+    font-weight: 700;
+    color: #555;
+    letter-spacing: .04em;
+    margin-bottom: 10px;
+  }
+
+  .event-desc {
+    font-size: 11px;
+    font-weight: 400;
+    color: #2a2a2a;
+    line-height: 1.75;
+    max-width: 620px;
+  }
+
+  .event-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--blue);
+    padding-bottom: 1px;
+    transition: opacity 0.2s;
+  }
+  .event-link:hover { opacity: 0.7; }
+
+  /* KEY WIN badge — exact match from resume */
+  .kw {
+    display: inline-block;
+    background: var(--blue);
+    color: #fff;
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 1px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid #ccc;
+    padding: 20px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-back {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-back:hover { color: var(--blue); }
+  .footer-back::before { content: '← '; }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+  .footer-links a {
+    font-size: 11px;
+    font-weight: 400;
+    color: #555;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--blue); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .topstrip, .name-hero, .body, .divider, footer {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .divider { margin-left: 24px; margin-right: 24px; }
+    .section-row { flex-direction: column; }
+    .sec-left { width: 100%; padding-right: 0; margin-bottom: 12px; }
+    .sec-right { border-top: none; padding-top: 0; }
+    .event-title-row { flex-direction: column; }
+    .event-location { text-align: left; }
+    .ts-right { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP STRIP — exact resume match -->
+<div class="topstrip">
+  <div class="ts-label">Reference Work for Meghan / InMobi</div>
+  <div class="ts-mid">nicklak@mac.com<br>www.nicklak.com<br>718.288.8516</div>
+  <div class="ts-right">40 Fane Ct<br>Brooklyn, NY 11229</div>
+</div>
+
+
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- INTRO BLURB -->
+  <div class="section-row" style="opacity:1; animation:none;">
+    <div class="sec-left"></div>
+    <div class="sec-right" style="border-top: 1px solid #ddd; padding-top: 18px; margin-bottom: 0;">
+      <div style="font-size: 12px; font-weight: 400; line-height: 1.9; color: #2a2a2a; max-width: 620px;">
+        Meghan — great connecting today. Thank you for taking the time to talk, I know you are busy on all fronts. Below are a few examples of the work we discussed. Sounds like an exciting time at InMobi. Looking forward to talking further. Thank you!
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="section-row">
+    <div class="sec-left">
+      <div class="sec-label">Events</div>
+    </div>
+    <div class="sec-right">
+
+      <div class="event-entry">
+        <div class="event-title-row">
+          <div class="event-title">TripleLift at Cannes</div>
+          <div class="event-location">Cannes · 2025<br>Clik Events</div>
+        </div>
+        <div class="event-subtitle">Branded Apartment & Creative Hub</div>
+        <div class="event-desc">
+          A Cannes apartment transformed into a multi-functional creative environment, seamlessly transitioning between executive meetings and cocktail receptions while holding the full weight of the TripleLift brand.
+        </div>
+        <a class="event-link" href="https://www.clik.events/projects/triplelift/" target="_blank">View Project →</a>
+      </div>
+
+      <div class="event-entry">
+        <div class="event-title-row">
+          <div class="event-title">The Imaginarium</div>
+          <div class="event-location">Cannes Lions<br>The Croisette</div>
+        </div>
+        <div class="event-subtitle">Immersive Storefront Activation</div>
+        <div class="event-desc">
+          An interactive LED storefront on the Croisette. Guerrilla marketing, bespoke brand partnerships, and brand ambassadors driving <strong>17,349 social impressions</strong> and <strong>2,000+ attendees</strong> engaged in the streets of Cannes.
+        </div>
+        <a class="event-link" href="https://cheerfultwentyfirst.com/work/the-imaginarium/" target="_blank">View Project →</a>
+      </div>
+
+      <div class="event-entry">
+        <div class="event-title-row">
+          <div class="event-title">A New Signal for Success</div>
+          <div class="event-location">New York<br>Lightbox NYC</div>
+        </div>
+        <div class="event-subtitle">Interactive Summit & Product Launch</div>
+        <div class="event-desc">
+          A product launch that transformed live, from 360° projection presentations with global streaming to an immersive brand activation with motion-responsive projections and choreographed performers. One seamless, unforgettable night.
+        </div>
+        <a class="event-link" href="https://lightbox.io/experiences/triplelift" target="_blank">View Project →</a>
+      </div>
+
+      <div class="event-entry" style="margin-top: 32px; padding-top: 32px; border-top: 1px solid #e8e8e8;">
+        <div class="event-title-row">
+          <div class="event-title">Portfolio Site / 2020</div>
+          <div class="event-location">nicklak.com</div>
+        </div>
+        <div class="event-subtitle">Additional Work & Projects</div>
+        <div class="event-desc">
+          Please note this site was built in 2020 and reflects work through 2019. Approximately 6 years old and has not been updated since. Shared for reference only.
+        </div>
+        <a class="event-link" href="https://www.nicklak.com" target="_blank">Visit nicklak.com →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONNECT -->
+  <div class="section-row">
+    <div class="sec-left"><div class="sec-label">Connect</div></div>
+    <div class="sec-right">
+      <div style="font-size:11px; font-weight:400; line-height:1.75;">
+        instagram.com/nicklakiotes
+        <span style="color:#ccc; margin:0 6px;">·</span>
+        linkedin.com/in/nicklakiotes
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-back" href="https://www.nicklakiotes.com">Resume</a>
+  <div class="footer-links">
+    <a href="https://instagram.com/nicklakiotes" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com/in/nicklakiotes/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+</body>
+</html>
